@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-26T08:15:14Z",
+  "title": "Design System: Chakhriya Korada Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "warm-ivory": {
+        "role": "neutral",
+        "displayName": "Warm Ivory Field",
+        "canonical": "#F4EFE5",
+        "tonalRamp": ["#302A21", "#554B3D", "#776C5B", "#9A8E7B", "#BDB2A2", "#D8D0C5", "#EAE4D9", "#F4EFE5"]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#FCFAF6",
+        "tonalRamp": ["#302C27", "#554F47", "#797168", "#9D958B", "#C0B9B0", "#DDD8D1", "#EFEBE5", "#FCFAF6"]
+      },
+      "charcoal-ink": {
+        "role": "neutral",
+        "displayName": "Charcoal Ink",
+        "canonical": "#171513",
+        "tonalRamp": ["#171513", "#34312E", "#55514D", "#79746F", "#9F9993", "#C4BEB8", "#E2DDD8", "#F7F3EF"]
+      },
+      "warm-grey": {
+        "role": "neutral",
+        "displayName": "Warm Grey Copy",
+        "canonical": "#6F6861",
+        "tonalRamp": ["#28231F", "#49413B", "#6F6861", "#8C847D", "#AAA39C", "#C9C3BD", "#E3DEDA", "#F5F1ED"]
+      },
+      "oxblood": {
+        "role": "primary",
+        "displayName": "Oxblood Annotation",
+        "canonical": "#7F0D12",
+        "tonalRamp": ["#310305", "#57080C", "#7F0D12", "#A5262B", "#C94D51", "#E28284", "#F2BABC", "#FBE9E9"]
+      },
+      "oxblood-dark": {
+        "role": "primary",
+        "displayName": "Deep Oxblood",
+        "canonical": "#57080C",
+        "tonalRamp": ["#260203", "#420507", "#57080C", "#7F151A", "#A5363A", "#CC696C", "#E7A8AA", "#F8E2E3"]
+      },
+      "warm-border": {
+        "role": "neutral",
+        "displayName": "Soft Binding Line",
+        "canonical": "#D8D0C5",
+        "tonalRamp": ["#2E2923", "#50483E", "#746A5E", "#988E81", "#BAB1A5", "#D8D0C5", "#E9E3DB", "#F7F3EE"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Editorial Display",
+        "purpose": "Rare identity-scale statements and selected project titles."
+      },
+      "body": {
+        "displayName": "Bilingual Body",
+        "purpose": "Long-form English and Thai reading."
+      },
+      "label": {
+        "displayName": "Interface Label",
+        "purpose": "Navigation, buttons, controls, and concise metadata."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-change",
+        "value": "160ms ease-out",
+        "purpose": "Short colour and border transitions for interactive feedback."
+      }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "0px" },
+      { "name": "tablet", "value": "768px" },
+      { "name": "desktop", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The principal action on a surface; use sparingly.",
+      "html": "<button class=\"ds-btn-primary\">View selected work</button>",
+      "css": ".ds-btn-primary { background: #7F0D12; color: #FCFAF6; border: 1px solid #7F0D12; border-radius: 4px; padding: 12px 20px; font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; transition: background-color 160ms ease-out, border-color 160ms ease-out; } .ds-btn-primary:hover { background: #57080C; border-color: #57080C; } .ds-btn-primary:focus-visible { outline: 3px solid #171513; outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A lower-emphasis action such as résumé or supporting navigation.",
+      "html": "<button class=\"ds-btn-secondary\">View résumé</button>",
+      "css": ".ds-btn-secondary { background: transparent; color: #171513; border: 1px solid #D8D0C5; border-radius: 4px; padding: 11px 19px; font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; transition: border-color 160ms ease-out, background-color 160ms ease-out; } .ds-btn-secondary:hover { background: #FCFAF6; border-color: #6F6861; } .ds-btn-secondary:focus-visible { outline: 3px solid #7F0D12; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "description": "A restrained field for future contact or filtering interfaces.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Email</span><input class=\"ds-input\" type=\"email\" placeholder=\"name@example.com\"></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: #171513; font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif; } .ds-field-label { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; } .ds-input { background: #FCFAF6; color: #171513; border: 1px solid #D8D0C5; border-radius: 4px; padding: 12px 14px; font: inherit; } .ds-input::placeholder { color: #6F6861; } .ds-input:hover { border-color: #6F6861; } .ds-input:focus-visible { outline: 3px solid #7F0D12; outline-offset: 2px; }"
+    },
+    {
+      "name": "Locale Navigation",
+      "kind": "nav",
+      "description": "Compact bilingual navigation with an explicit active locale.",
+      "html": "<nav class=\"ds-locale\" aria-label=\"Language\"><a class=\"ds-locale-active\" href=\"#\">EN</a><span aria-hidden=\"true\">/</span><a href=\"#\">TH</a></nav>",
+      "css": ".ds-locale { display: inline-flex; align-items: center; gap: 8px; color: #6F6861; font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; } .ds-locale a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 4px; } .ds-locale a:hover { color: #7F0D12; } .ds-locale a:focus-visible { outline: 2px solid #7F0D12; outline-offset: 3px; } .ds-locale .ds-locale-active { color: #7F0D12; text-decoration: underline; }"
+    },
+    {
+      "name": "Project Feature",
+      "kind": "custom",
+      "description": "A flat editorial project summary that foregrounds sequence and premise.",
+      "html": "<article class=\"ds-project\"><p class=\"ds-project-number\">01 / SELECTED WORK</p><h3>Floor Plan AI</h3><p>Human-in-the-loop tools for complex spatial planning.</p><a href=\"#\">Read case study</a></article>",
+      "css": ".ds-project { background: #FCFAF6; color: #171513; border-top: 1px solid #D8D0C5; padding: 32px 0; font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif; } .ds-project-number { color: #7F0D12; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; } .ds-project h3 { margin: 16px 0 12px; font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; font-weight: 400; line-height: 1; letter-spacing: -0.015em; } .ds-project p { max-width: 58ch; line-height: 1.7; } .ds-project a { color: #7F0D12; font-weight: 500; text-underline-offset: 4px; } .ds-project a:hover { color: #57080C; } .ds-project a:focus-visible { outline: 2px solid #7F0D12; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Living Casebook",
+    "overview": "The portfolio behaves like a carefully edited casebook whose evidence is actively being examined, connected, and explained. It pairs the authority and pacing of an independent design journal with the precision of a product walkthrough. The page is expressive through scale, sequencing, and selective asymmetry—not through ornament.\n\nThe visual system is warm, modern, and technically credible. Large editorial moments draw visitors into the work; disciplined sans-serif typography, a visible grid, concise metadata, and structured process content make the material easy to evaluate. The experience must never drift into ecommerce, luxury-campaign, wedding-brand, vintage-stationery, or generic AI-startup conventions.",
+    "keyCharacteristics": [
+      "Expressive editorial composition with controlled asymmetry",
+      "Warm paper-like neutrals and a scarce oxblood accent",
+      "Selective serif identity paired with highly readable bilingual sans-serif text",
+      "Varied media scale, generous whitespace, and clear evidence hierarchy",
+      "Flat, precise surfaces with minimal decoration and strong accessibility"
+    ],
+    "rules": [
+      {
+        "name": "The Red-Pencil Rule",
+        "body": "Oxblood marks actions, selection, sequence, and emphasis; it never carries long paragraphs or dominates large background regions.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper Hierarchy Rule",
+        "body": "Warm Ivory is the page; Paper White is a purposeful content layer. Do not alternate them mechanically section by section.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif Is a Signal Rule",
+        "body": "Instrument Serif identifies major narrative thresholds and selected work; it is never used for long paragraphs, dense controls, small labels, or complex navigation.",
+        "section": "typography"
+      },
+      {
+        "name": "The Bilingual Measure Rule",
+        "body": "English and Thai share hierarchy and intent, not forced line breaks or identical element heights. Containers flex to the reviewed translation.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Evidence Rule",
+        "body": "Content earns prominence through scale and placement. Shadows do not substitute for hierarchy.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do let selected case-study evidence lead the visual hierarchy.",
+      "Do use large editorial typography selectively and scale it responsibly on mobile.",
+      "Do use asymmetry to express priority while preserving a clear reading order.",
+      "Do vary image scale and content density to distinguish case studies from activities and achievements.",
+      "Do use Oxblood Annotation sparingly for action, navigation state, numbering, links, and precise highlights.",
+      "Do maintain visible focus, strong contrast, semantic structure, reduced-motion support, and flexible bilingual layouts.",
+      "Do label placeholders, synthetic demonstrations, and unconfirmed content honestly."
+    ],
+    "donts": [
+      "Don't reproduce ecommerce navigation, product grids, shop cards, badges, or category merchandising.",
+      "Don't use gradients, neon glow, glassmorphism, continuous animation, excessive shadows, or generic AI-startup imagery.",
+      "Don't use nested cards, unnecessary decorative icons, ornamental vintage treatments, floral motifs, or stationery styling.",
+      "Don't use Oxblood for long body copy or as an indiscriminate background.",
+      "Don't set long paragraphs, small labels, dense interface text, or complex navigation in the serif face.",
+      "Don't use low-contrast secondary text, overly thin serif weights, oversized mobile headings, or fixed-height text containers."
+    ]
+  }
+}
