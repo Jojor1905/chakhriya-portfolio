@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import styles from "./portfolio-loader.module.css";
 
 type PortfolioLoaderProps = {
   children: ReactNode;
 };
 
-const MINIMUM_DISPLAY_MS = 1400;
+const MINIMUM_DISPLAY_MS = 1600;
 const EXIT_DURATION_MS = 520;
 const FALLBACK_TIMEOUT_MS = 4000;
 
@@ -18,6 +19,8 @@ export function PortfolioLoader({ children }: PortfolioLoaderProps) {
   useEffect(() => {
     const startedAt = performance.now();
     let hasFinished = false;
+    let exitTimer: number | undefined;
+    let removeTimer: number | undefined;
 
     const finish = () => {
       if (hasFinished) return;
@@ -29,10 +32,10 @@ export function PortfolioLoader({ children }: PortfolioLoaderProps) {
         MINIMUM_DISPLAY_MS - (performance.now() - startedAt),
       );
 
-      window.setTimeout(() => {
+      exitTimer = window.setTimeout(() => {
         setProgress(100);
         setIsLeaving(true);
-        window.setTimeout(() => setIsVisible(false), EXIT_DURATION_MS);
+        removeTimer = window.setTimeout(() => setIsVisible(false), EXIT_DURATION_MS);
       }, remainingTime);
     };
 
@@ -51,6 +54,8 @@ export function PortfolioLoader({ children }: PortfolioLoaderProps) {
     return () => {
       window.clearInterval(progressTimer);
       window.clearTimeout(fallbackTimer);
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(removeTimer);
       window.removeEventListener("load", finish);
     };
   }, []);
@@ -60,24 +65,24 @@ export function PortfolioLoader({ children }: PortfolioLoaderProps) {
       {children}
       {isVisible ? (
         <div
-          className={`portfolio-loader${isLeaving ? " portfolio-loader--leaving" : ""}`}
+          className={`${styles.loader}${isLeaving ? ` ${styles.leaving}` : ""}`}
           aria-label="Preparing portfolio"
           role="status"
         >
-          <div className="portfolio-loader__haze" aria-hidden="true" />
-          <div className="loader-cloud-scene" aria-hidden="true">
-            <div className="loader-cloud-shadow" />
-            <div className="loader-cloud">
-              <span className="loader-cloud__lobe loader-cloud__lobe--one" />
-              <span className="loader-cloud__lobe loader-cloud__lobe--two" />
-              <span className="loader-cloud__lobe loader-cloud__lobe--three" />
-              <span className="loader-cloud__lobe loader-cloud__lobe--four" />
-              <span className="loader-cloud__lobe loader-cloud__lobe--five" />
-              <span className="loader-cloud__base" />
-              <span className="loader-cloud__highlight" />
+          <div className={styles.haze} aria-hidden="true" />
+          <div className={styles.cloudScene} aria-hidden="true">
+            <div className={styles.cloudShadow} />
+            <div className={styles.cloud}>
+              <span className={`${styles.lobe} ${styles.lobeOne}`} />
+              <span className={`${styles.lobe} ${styles.lobeTwo}`} />
+              <span className={`${styles.lobe} ${styles.lobeThree}`} />
+              <span className={`${styles.lobe} ${styles.lobeFour}`} />
+              <span className={`${styles.lobe} ${styles.lobeFive}`} />
+              <span className={styles.base} />
+              <span className={styles.highlight} />
             </div>
           </div>
-          <p className="portfolio-loader__label">
+          <p className={styles.label}>
             Preparing the atmosphere <span>{progress}%</span>
           </p>
         </div>
