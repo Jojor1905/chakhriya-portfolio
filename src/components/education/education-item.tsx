@@ -13,9 +13,9 @@ export function EducationItem({
   }`;
 
   return (
-    <div className="education-timeline__item">
+    <article className="education-timeline__item">
+      <p className="education-timeline__period">{period}</p>
       <div className="education-timeline__content">
-        <p className="education-timeline__period">{period}</p>
         <div className="education-timeline__institution education-institution">
           <Image
             className={`education-timeline__logo education-timeline__logo--${item.logoVariant}`}
@@ -60,6 +60,6 @@ export function EducationItem({
         className="education-timeline__dot"
         aria-hidden="true"
       />
-    </div>
+    </article>
   );
 }

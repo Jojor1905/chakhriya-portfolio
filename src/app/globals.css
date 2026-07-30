@@ -5420,6 +5420,177 @@ body:has(.portfolio-loader[data-phase="opening"]) .hero-portrait {
   }
 }
 
+/* Education timeline: each milestone owns a three-column reading grid. */
+.education__container {
+  display: grid;
+  grid-template-columns: minmax(17.5rem, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(4rem, 8vw, 8.75rem);
+  align-items: start;
+}
+
+.education__heading {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.education-timeline {
+  --timeline-date-width: 6.5rem;
+  --timeline-marker-width: 2rem;
+  --timeline-marker-center: calc(
+    var(--timeline-date-width) + (var(--timeline-marker-width) / 2)
+  );
+  position: relative;
+  width: 100%;
+  margin-top: 0;
+}
+
+.education-timeline__motion-line {
+  top: 0.8125rem;
+  right: auto;
+  bottom: 0.8125rem;
+  left: var(--timeline-marker-center);
+  z-index: 0;
+  width: 2px;
+  background: color-mix(in srgb, var(--accent-strong) 62%, var(--border));
+}
+
+.education-timeline__list {
+  position: relative;
+  display: grid;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.education-timeline__list::before {
+  display: none;
+}
+
+.education-timeline__list > li {
+  min-width: 0;
+}
+
+.education-timeline__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--timeline-date-width) var(--timeline-marker-width) minmax(0, 1fr);
+  align-items: start;
+  min-width: 0;
+  padding: 0;
+}
+
+.education-timeline__period {
+  position: static;
+  grid-column: 1;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1.35;
+}
+
+.education-timeline__content {
+  grid-column: 3;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.education-timeline__dot {
+  position: absolute;
+  top: 0;
+  left: calc(var(--timeline-marker-center) - 0.8125rem);
+  z-index: 1;
+  width: 1.625rem;
+  height: 1.625rem;
+  border: 3px solid var(--background-light);
+  border-radius: 50%;
+  background: var(--accent-strong);
+  box-shadow: none;
+}
+
+.education-timeline__institution {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+}
+
+.education-timeline__institution h3,
+.education-timeline__location,
+.education-timeline__details dd {
+  overflow-wrap: anywhere;
+}
+
+.education-timeline__details {
+  display: grid;
+  gap: 0.625rem;
+  margin-top: 1.5rem;
+}
+
+.education-timeline__details > div {
+  grid-template-columns: 8.25rem minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 767px) {
+  .education__container {
+    display: block;
+  }
+
+  .education__heading {
+    max-width: 42rem;
+  }
+
+  .education-timeline {
+    --timeline-marker-width: 2rem;
+    --timeline-marker-center: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .education-timeline__motion-line {
+    top: 0.8125rem;
+    bottom: 0.8125rem;
+    left: var(--timeline-marker-center);
+  }
+
+  .education-timeline__list {
+    gap: 2.75rem;
+  }
+
+  .education-timeline__item {
+    grid-template-columns: var(--timeline-marker-width) minmax(0, 1fr);
+    row-gap: 0.875rem;
+  }
+
+  .education-timeline__period {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .education-timeline__content {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .education-timeline__dot {
+    top: 0;
+    left: calc(var(--timeline-marker-center) - 0.8125rem);
+  }
+}
+
+@media (max-width: 460px) {
+  .education-timeline__details > div {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
+  }
+}
+
 /* Isolated signature-book prototype. Values are intentionally local to this scene. */
 .signature-book-preview {
   --book-paper: #f8f8f3;
