@@ -440,8 +440,16 @@ export const projects: Project[] = [
       "Sketch2Spec is an AI-assisted PropTech concept developed for an SCG Industry Challenge. The project explores how rough two-dimensional floor-plan sketches could be interpreted and transformed into clearer digital representations to support design exploration and material-planning activities.",
     sections: [
       {
-        title: "Challenge",
-        body: "Floor-plan sketches can be incomplete, inconsistent, or difficult to prepare for further digital use. This may create additional effort when converting early design ideas into structured visual information.",
+        title: "Problem / Challenge",
+        body: "Early floor-plan sketches can be incomplete, inconsistent, or difficult for non-specialists to interpret. Turning those early ideas into structured visual information may require additional effort and can make design discussions or material-planning exploration harder to communicate clearly.",
+      },
+      {
+        title: "Project Objective",
+        body: "The project explored how a more approachable digital concept could help people move from a rough spatial idea toward a clearer representation. The goal was to make early design exploration easier to understand while keeping the concept focused on support, review, and communication rather than automated certainty.",
+      },
+      {
+        title: "Proposed Solution",
+        body: "Sketch2Spec combines AI-assisted image interpretation, computer vision, and digital visualisation to explore how rough floor-plan inputs could become clearer, editable-looking digital outputs. The concept focuses on making spatial ideas more tangible for discussion, design exploration, and material-planning use without exposing a detailed processing sequence.",
         images: [
           {
             src: "/Image/project/SCG/SCG2.png",
@@ -453,8 +461,15 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "Proposed Solution",
-        body: "The concept combines AI-assisted image interpretation, computer vision, and digital visualisation to explore a more accessible way of converting rough floor-plan inputs into usable digital outputs.",
+        title: "Key Features / Concept Highlights",
+        body: "The concept was framed around an understandable, user-centred workspace rather than a technical tool for specialists.",
+        points: [
+          "AI-assisted interpretation of rough floor-plan inputs",
+          "Clearer digital visualisation for early spatial exploration",
+          "A review-oriented approach that keeps people in control of the concept",
+          "Material-planning exploration presented through a more tangible visual context",
+          "Plain-language interface direction for people without complex design software experience",
+        ],
         images: [
           {
             src: "/Image/project/SCG/SCG3.png",
@@ -466,7 +481,8 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "My Contribution",
+        title: "My Role and Contribution",
+        body: "I helped shape the concept from the initial problem framing through to its UX/UI direction and visual communication. My work focused on making the technical idea understandable as a user-centred product concept.",
         points: [
           "Product concept development",
           "UX/UI design",
@@ -477,12 +493,16 @@ export const projects: Project[] = [
         ],
       },
       {
+        title: "Design and Development Approach",
+        body: "The approach combined product thinking with UX/UI exploration and high-level AI research. I focused on clarifying the problem, considering where computer vision could support the concept, and translating the opportunity into an interface direction that communicates system intent, user control, and visual hierarchy without depending on a detailed technical workflow.",
+      },
+      {
         title: "Tools & Technologies",
-        body: "Figma, FigJam, Python, Computer Vision, GroundingDINO, SAM, YOLO, Three.js, and AI-assisted research tools.",
+        body: "Figma, FigJam, Python, Computer Vision, GroundingDINO, SAM, YOLO, Three.js, and AI-assisted research tools were used to support concept development, design exploration, and technology research.",
       },
       {
         title: "Outcome / Key Learning",
-        body: "The project strengthened my experience in combining product thinking, UX/UI design, and emerging AI technologies within an industry-focused challenge. It also helped me practise presenting a complex technical concept in a clear and user-centred way.",
+        body: "The project strengthened my experience in connecting product thinking, UX/UI design, and emerging AI technologies within an industry-focused challenge. It also helped me practise framing technical possibilities responsibly, designing for review and clarity, and presenting a complex concept in a concise, user-centred way.",
       },
     ],
   },
