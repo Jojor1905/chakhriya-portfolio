@@ -4601,107 +4601,6 @@ body {
   transform-style: preserve-3d;
 }
 
-.dimensional-cloud {
-  position: absolute;
-  inset: 0;
-  display: block;
-  overflow: visible;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  box-shadow: none;
-  animation: floating-cloud-drift var(--cloud-drift-duration, 42s)
-    ease-in-out infinite alternate;
-  animation-play-state: paused;
-  transform-style: preserve-3d;
-}
-
-.floating-cloud[data-cloud-active="true"] .dimensional-cloud {
-  animation-play-state: running;
-}
-
-.floating-cloud[data-cloud-paused="true"] .dimensional-cloud {
-  animation-play-state: paused;
-}
-
-.dimensional-cloud__image {
-  z-index: 3;
-  background: transparent;
-  object-fit: contain;
-  opacity: var(--cloud-opacity);
-  filter: saturate(0.8) contrast(1.06) brightness(0.98);
-  transform: translate3d(
-    calc(var(--cloud-pointer-x, 0px) * 0.92),
-    calc(var(--cloud-pointer-y, 0px) * 0.92),
-    12px
-  );
-}
-
-.dimensional-cloud__haze,
-.dimensional-cloud__shadow,
-.dimensional-cloud__highlight {
-  position: absolute;
-  display: block;
-  pointer-events: none;
-}
-
-.dimensional-cloud__haze {
-  z-index: 1;
-  inset: 4% -5% -8%;
-  background: radial-gradient(
-    ellipse at 48% 60%,
-    rgb(230 244 252 / 30%) 0%,
-    rgb(204 225 238 / 12%) 42%,
-    transparent 73%
-  );
-  filter: blur(22px);
-  opacity: var(--cloud-opacity);
-  transform: translate3d(
-    calc(var(--cloud-pointer-x, 0px) * 0.72),
-    calc(var(--cloud-pointer-y, 0px) * 0.72),
-    2px
-  );
-}
-
-.dimensional-cloud__shadow {
-  z-index: 2;
-  right: 5%;
-  bottom: 3%;
-  left: 8%;
-  height: 42%;
-  background: radial-gradient(
-    ellipse at center,
-    rgb(50 77 96 / 30%) 0%,
-    rgb(65 94 114 / 16%) 44%,
-    transparent 76%
-  );
-  filter: blur(30px);
-  opacity: var(--cloud-opacity);
-  transform: translate3d(
-    calc(14px + var(--cloud-pointer-x, 0px) * 1.18),
-    calc(18px + var(--cloud-pointer-y, 0px) * 1.18),
-    6px
-  );
-}
-
-.dimensional-cloud__highlight {
-  z-index: 4;
-  inset: 8% 12% 34% 10%;
-  background: radial-gradient(
-    ellipse at 30% 24%,
-    rgb(255 255 255 / 38%) 0%,
-    rgb(255 255 255 / 12%) 30%,
-    transparent 66%
-  );
-  mix-blend-mode: screen;
-  opacity: calc(var(--cloud-opacity) * 0.44);
-  transform: translate3d(
-    calc(var(--cloud-pointer-x, 0px) * 0.56),
-    calc(var(--cloud-pointer-y, 0px) * 0.56),
-    18px
-  );
-}
-
 .floating-cloud--internship {
   --cloud-drift-duration: 38s;
   --cloud-depth-z: 8px;
@@ -4721,62 +4620,6 @@ body {
   --cloud-depth-z: 4px;
   top: 86%;
   right: -20%;
-}
-
-.floating-cloud--contact .dimensional-cloud {
-  background: transparent;
-  border: 0;
-  outline: 0;
-  box-shadow: none;
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    #000 52%,
-    rgb(0 0 0 / 90%) 66%,
-    rgb(0 0 0 / 35%) 82%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    #000 52%,
-    rgb(0 0 0 / 90%) 66%,
-    rgb(0 0 0 / 35%) 82%,
-    transparent 100%
-  );
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-}
-
-.floating-cloud--contact .dimensional-cloud__image {
-  filter: brightness(0.58) saturate(0.62) contrast(1.08);
-}
-
-.floating-cloud--contact .dimensional-cloud__haze {
-  background: radial-gradient(
-    ellipse at 48% 60%,
-    rgb(112 157 182 / 24%) 0%,
-    rgb(20 43 58 / 4%) 58%,
-    transparent 76%
-  );
-}
-
-.floating-cloud--projects .dimensional-cloud__haze,
-.floating-cloud--projects .dimensional-cloud__shadow,
-.floating-cloud--projects .dimensional-cloud__highlight {
-  opacity: calc(var(--cloud-opacity) * 0.55);
-}
-
-@keyframes floating-cloud-drift {
-  from {
-    transform: translate3d(-10px, -4px, 0);
-  }
-
-  to {
-    transform: translate3d(14px, 7px, 0);
-  }
 }
 
 .portfolio-atmosphere .section,
@@ -4875,7 +4718,7 @@ body {
     opacity: 0.78;
   }
 
-  .floating-cloud--desktop-only {
+  .cloud--desktop-only {
     display: none;
   }
 
@@ -4889,19 +4732,6 @@ body {
 
   .floating-cloud--projects {
     display: none;
-  }
-
-  .dimensional-cloud__haze {
-    filter: blur(16px);
-  }
-
-  .dimensional-cloud__shadow {
-    filter: blur(22px);
-    opacity: calc(var(--cloud-opacity) * 0.72);
-  }
-
-  .dimensional-cloud__highlight {
-    opacity: calc(var(--cloud-opacity) * 0.3);
   }
 
 }
@@ -5317,6 +5147,14 @@ body {
   z-index: 1;
 }
 
+.hero-scene > .hero-cloud {
+  z-index: 0;
+  top: 7%;
+  right: -3%;
+  --cloud-drift-duration: 34s;
+  --cloud-depth-z: 1rem;
+}
+
 .hero h1,
 .hero__label {
   color: #102536;
@@ -5360,10 +5198,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .floating-cloud {
     transform: none !important;
-  }
-
-  .dimensional-cloud {
-    animation: none !important;
   }
 
   .sky-atmosphere__video {

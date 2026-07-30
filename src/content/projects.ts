@@ -430,18 +430,18 @@ export const projects: Project[] = [
       "GroundingDINO",
       "SAM",
       "YOLO",
-      "3D Visualisation",
-      "AI-assisted Research",
+      "Three.js",
+      "AI-assisted research tools",
     ],
     featured: true,
     experienceType: "academic",
-    overviewTitle: "Overview",
+    overviewTitle: "Project Overview",
     overviewBody:
-      "Sketch2Spec is a conceptual AI-assisted solution exploring how rough floor-plan sketches could be transformed into clearer digital representations to support design and material-planning workflows.",
+      "Sketch2Spec is an AI-assisted PropTech concept developed for an SCG Industry Challenge. The project explores how rough two-dimensional floor-plan sketches could be interpreted and transformed into clearer digital representations to support design exploration and material-planning activities.",
     sections: [
       {
         title: "Challenge",
-        body: "Floor-plan information can be difficult to interpret and prepare for further digital use, especially when the original input is incomplete or unstructured.",
+        body: "Floor-plan sketches can be incomplete, inconsistent, or difficult to prepare for further digital use. This may create additional effort when converting early design ideas into structured visual information.",
         images: [
           {
             src: "/Image/project/SCG/SCG2.png",
@@ -454,7 +454,7 @@ export const projects: Project[] = [
       },
       {
         title: "Proposed Solution",
-        body: "A high-level concept that uses AI and computer vision to assist with floor-plan interpretation and digital visualisation.",
+        body: "The concept combines AI-assisted image interpretation, computer vision, and digital visualisation to explore a more accessible way of converting rough floor-plan inputs into usable digital outputs.",
         images: [
           {
             src: "/Image/project/SCG/SCG3.png",
@@ -468,21 +468,21 @@ export const projects: Project[] = [
       {
         title: "My Contribution",
         points: [
-          "UX/UI design",
           "Product concept development",
-          "User research and problem framing",
+          "UX/UI design",
+          "Problem framing and user research",
           "Interface prototyping",
           "AI and computer-vision research",
-          "Presentation design",
+          "Visual communication and presentation design",
         ],
       },
       {
         title: "Tools & Technologies",
-        body: "Figma, FigJam, Python, Computer Vision, GroundingDINO, SAM, YOLO, 3D visualisation tools, and AI-assisted research tools.",
+        body: "Figma, FigJam, Python, Computer Vision, GroundingDINO, SAM, YOLO, Three.js, and AI-assisted research tools.",
       },
       {
         title: "Outcome / Key Learning",
-        body: "The project strengthened my experience in combining product thinking, UX/UI design, and emerging AI technologies while working within an industry-focused challenge.",
+        body: "The project strengthened my experience in combining product thinking, UX/UI design, and emerging AI technologies within an industry-focused challenge. It also helped me practise presenting a complex technical concept in a clear and user-centred way.",
       },
     ],
   },

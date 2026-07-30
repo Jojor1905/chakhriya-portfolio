@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { DimensionalCloud } from "@/components/atmosphere/dimensional-cloud";
 import { ActivityList } from "@/components/activity/activity-list";
 import { CertificateSlider } from "@/components/certificate/certificate-slider";
 import { ContactSection } from "@/components/contact/contact-section";
@@ -30,7 +31,6 @@ type HomePageProps = {
 const floatingClouds = [
   {
     id: "internship-boundary",
-    src: "/Image/atmosphere/cloud3.png",
     className: "floating-cloud--internship",
     size: "clamp(20rem, 31vw, 36rem)",
     aspectRatio: "4 / 3",
@@ -40,7 +40,6 @@ const floatingClouds = [
   },
   {
     id: "projects-edge",
-    src: "/Image/atmosphere/cloud.png",
     className: "floating-cloud--projects",
     size: "clamp(14rem, 20vw, 22rem)",
     aspectRatio: "1 / 1",
@@ -51,13 +50,13 @@ const floatingClouds = [
   },
   {
     id: "contact-dusk",
-    src: "/Image/atmosphere/cloud4.png",
     className: "floating-cloud--contact",
     size: "clamp(30rem, 50vw, 64rem)",
     aspectRatio: "11 / 6",
     opacity: 0.5,
     depth: 0.64,
     pointer: 13,
+    variant: "dusk",
   },
 ] as const;
 
@@ -102,6 +101,16 @@ export function HomePage({ dictionary }: HomePageProps) {
         <Reveal className="hero" aria-labelledby="hero-title" initial>
           <SkyAtmosphere />
           <HeroScene>
+            <DimensionalCloud
+              id="hero-atmosphere"
+              className="hero-cloud"
+              size="clamp(20rem, 34vw, 34rem)"
+              aspectRatio="4 / 3"
+              opacity={0.44}
+              depth={0.24}
+              pointer={6}
+              mobile={false}
+            />
             <div className="hero__content">
               <p className="hero__label">{hero.label}</p>
               <HeroHeading id="hero-title" title={hero.title} />
