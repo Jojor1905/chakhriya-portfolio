@@ -3977,7 +3977,7 @@ button:focus-visible {
 
 .contact-section__actions {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: clamp(2.5rem, 5vw, 4rem);
 }
 
@@ -4017,6 +4017,10 @@ button:focus-visible {
 
 .contact-action__linkedin-icon {
   object-position: left center;
+}
+
+.contact-action__github-icon {
+  filter: invert(1);
 }
 
 .contact-action__content {

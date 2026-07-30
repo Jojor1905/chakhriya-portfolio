@@ -97,6 +97,30 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
               <ArrowUpRightIcon className="contact-action__arrow arrow-icon" aria-hidden="true" />
               </a>
             </StaggerItem>
+
+            <StaggerItem distance={18}>
+              <a
+                className="contact-action"
+                href={contactDetails.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Chakhriya Korada’s GitHub profile"
+              >
+                <Image
+                  className="contact-action__icon contact-action__github-icon"
+                  src="/Image/icons/github.svg"
+                  alt=""
+                  width={24}
+                  height={24}
+                  aria-hidden="true"
+                />
+                <span className="contact-action__content">
+                  <span className="contact-action__label">GitHub</span>
+                  <span className="contact-action__detail">View my projects</span>
+                </span>
+                <ArrowUpRightIcon className="contact-action__arrow arrow-icon" aria-hidden="true" />
+              </a>
+            </StaggerItem>
           </StaggerGroup>
         </div>
 
