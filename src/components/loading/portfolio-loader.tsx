@@ -2,18 +2,21 @@
 
 import { Canvas } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
-import { CloudMotion, DEFAULT_CONTROLS } from "@/components/cloud-lab/cloud-lab";
+import { CloudCurtainScene, type CloudCurtainPhase } from "@/components/cloud-lab/cloud-lab";
 import styles from "./portfolio-loader.module.css";
 
 const SESSION_KEY = "portfolio-loader-seen";
-const INTRO_MS = 1300;
-const REDUCED_INTRO_MS = 300;
-const EXIT_MS = 360;
+const ENTRANCE_MS = 460;
+const SETTLE_MS = 600;
+const OPENING_MS = 1050;
+const HAZE_EXIT_MS = 360;
+const RETURN_OPENING_MS = 260;
+const REDUCED_OPENING_MS = 180;
 const FALLBACK_MS = 3500;
 
 export function PortfolioLoader() {
   const [visible, setVisible] = useState(true);
-  const [leaving, setLeaving] = useState(false);
+  const [phase, setPhase] = useState<CloudCurtainPhase>("entering");
   const [reduced, setReduced] = useState(false);
   const [mobile, setMobile] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
@@ -41,23 +44,27 @@ export function PortfolioLoader() {
       setPageVisible(!document.hidden);
     });
 
-    let exitTimer = 0;
+    let waitingTimer = 0;
+    let openingTimer = 0;
+    let completeTimer = 0;
     let fallbackTimer = 0;
-    let removalTimer = 0;
     const finish = () => {
       if (finished.current) return;
       finished.current = true;
-      window.clearTimeout(exitTimer);
+      window.clearTimeout(waitingTimer);
+      window.clearTimeout(openingTimer);
       window.clearTimeout(fallbackTimer);
-      setLeaving(true);
-      removalTimer = window.setTimeout(
-        () => setVisible(false),
-        reducedMotion ? 160 : EXIT_MS,
-      );
+      setPhase("complete");
+      completeTimer = window.setTimeout(() => setVisible(false), reducedMotion ? 120 : HAZE_EXIT_MS);
     };
 
-    const duration = seen ? 80 : reducedMotion ? REDUCED_INTRO_MS : INTRO_MS;
-    exitTimer = window.setTimeout(finish, duration);
+    const entrance = seen || reducedMotion ? 40 : ENTRANCE_MS;
+    const settle = seen || reducedMotion ? 0 : SETTLE_MS;
+    const opening = seen ? RETURN_OPENING_MS : reducedMotion ? REDUCED_OPENING_MS : OPENING_MS;
+
+    waitingTimer = window.setTimeout(() => setPhase("waiting"), entrance);
+    openingTimer = window.setTimeout(() => setPhase("opening"), entrance + settle);
+    const exitTimer = window.setTimeout(finish, entrance + settle + opening);
     fallbackTimer = window.setTimeout(() => {
       if (finished.current) return;
       finished.current = true;
@@ -79,9 +86,11 @@ export function PortfolioLoader() {
 
     return () => {
       window.cancelAnimationFrame(initialStateFrame);
+      window.clearTimeout(waitingTimer);
+      window.clearTimeout(openingTimer);
       window.clearTimeout(exitTimer);
       window.clearTimeout(fallbackTimer);
-      window.clearTimeout(removalTimer);
+      window.clearTimeout(completeTimer);
       reduceQuery.removeEventListener("change", onMotionChange);
       mobileQuery.removeEventListener("change", onMobileChange);
       document.removeEventListener("visibilitychange", onVisibilityChange);
@@ -92,11 +101,13 @@ export function PortfolioLoader() {
 
   return (
     <div
-      className={`${styles.loader}${leaving ? ` ${styles.leaving}` : ""}`}
+      className={styles.loader}
+      data-phase={phase}
       role="status"
       aria-live="polite"
       aria-label="Loading portfolio"
     >
+      <div className={styles.sky} aria-hidden="true" />
       <div className={styles.canvas} aria-hidden="true">
         {webgl && (
           <Canvas
@@ -105,10 +116,11 @@ export function PortfolioLoader() {
             frameloop={reduced || !pageVisible ? "demand" : "always"}
             gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
           >
-            <CloudMotion controls={DEFAULT_CONTROLS} mobile={mobile} reducedMotion={reduced} />
+            <CloudCurtainScene phase={phase} mobile={mobile} reducedMotion={reduced} />
           </Canvas>
         )}
       </div>
+      <span className={styles.haze} aria-hidden="true" />
       <p className={styles.label}>Loading portfolio</p>
     </div>
   );

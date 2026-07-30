@@ -5220,6 +5220,36 @@ body {
   transform: none;
 }
 
+body:has(.portfolio-loader) .hero__content,
+body:has(.portfolio-loader) .hero-portrait {
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body:has(.portfolio-loader[data-phase="entering"]) .hero__content,
+body:has(.portfolio-loader[data-phase="entering"]) .hero-portrait,
+body:has(.portfolio-loader[data-phase="waiting"]) .hero__content,
+body:has(.portfolio-loader[data-phase="waiting"]) .hero-portrait {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+body:has(.portfolio-loader[data-phase="opening"]) .hero__content,
+body:has(.portfolio-loader[data-phase="opening"]) .hero-portrait {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(.portfolio-loader) .hero__content,
+  body:has(.portfolio-loader) .hero-portrait {
+    opacity: 1;
+    transform: none;
+    transition-duration: 180ms;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sky-atmosphere__video {
     display: none;

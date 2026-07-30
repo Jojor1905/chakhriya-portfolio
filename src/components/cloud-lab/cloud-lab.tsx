@@ -3,7 +3,7 @@
 import { Cloud, Clouds } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Group } from "three";
+import { MathUtils, type Group } from "three";
 import styles from "./cloud-lab.module.css";
 
 export type CloudLabControls = {
@@ -144,6 +144,65 @@ export function CloudMotion({
             speed={controls.noiseSpeed * 0.45}
             color="#dcebf3"
           />
+        </group>
+      </Clouds>
+    </>
+  );
+}
+
+export type CloudCurtainPhase = "entering" | "waiting" | "opening" | "complete";
+
+export function CloudCurtainScene({
+  phase,
+  mobile,
+  reducedMotion,
+}: {
+  phase: CloudCurtainPhase;
+  mobile: boolean;
+  reducedMotion: boolean;
+}) {
+  const leftCurtain = useRef<Group>(null);
+  const rightCurtain = useRef<Group>(null);
+  const opening = useRef(0);
+
+  useFrame((_, delta) => {
+    if (reducedMotion) return;
+
+    const target = phase === "opening" || phase === "complete" ? 1 : 0;
+    opening.current = MathUtils.damp(opening.current, target, 3.4, delta);
+    const progress = opening.current;
+    const travel = mobile ? 4.2 : 6.2;
+
+    if (leftCurtain.current) {
+      leftCurtain.current.position.x = MathUtils.lerp(-0.85, -travel, progress);
+      leftCurtain.current.position.y = MathUtils.lerp(0.18, 0.42, progress);
+      leftCurtain.current.position.z = MathUtils.lerp(1.2, 1.65, progress);
+      leftCurtain.current.scale.setScalar(MathUtils.lerp(1, 1.08, progress));
+    }
+
+    if (rightCurtain.current) {
+      rightCurtain.current.position.x = MathUtils.lerp(0.95, travel, progress);
+      rightCurtain.current.position.y = MathUtils.lerp(-0.2, -0.32, progress);
+      rightCurtain.current.position.z = MathUtils.lerp(1.05, 1.55, progress);
+      rightCurtain.current.scale.setScalar(MathUtils.lerp(1, 1.075, progress));
+    }
+  });
+
+  const segments = mobile ? 28 : 48;
+
+  return (
+    <>
+      <ambientLight intensity={1.4} color="#eaf6fb" />
+      <directionalLight position={[-4, 5, 4]} intensity={1.5} color="#fff9f0" />
+      <directionalLight position={[3, -2, 2]} intensity={0.28} color="#a5c4d5" />
+      <Clouds texture="/Image/atmosphere/cloud.png" limit={mobile ? 60 : 96} range={mobile ? 60 : 96}>
+        <group ref={leftCurtain} position={[-0.85, 0.18, 1.2]} rotation={[0.04, -0.12, 0.02]}>
+          <Cloud seed={8} segments={segments} bounds={[4.65, 2.05, 1.5]} concentrate="inside" volume={5.8} smallestVolume={0.18} growth={4.1} fade={18} opacity={0.92} speed={0.065} color="#f8fcff" />
+          <Cloud seed={13} segments={mobile ? 16 : 24} bounds={[2.5, 1.1, 1]} concentrate="inside" volume={3.3} smallestVolume={0.18} growth={3.2} fade={13} opacity={0.42} speed={0.04} color="#dcebf3" position={[-1.65, -0.55, -1.1]} />
+        </group>
+        <group ref={rightCurtain} position={[0.95, -0.2, 1.05]} rotation={[-0.03, 0.14, -0.03]}>
+          <Cloud seed={21} segments={segments} bounds={[4.45, 2.25, 1.45]} concentrate="inside" volume={5.5} smallestVolume={0.18} growth={4.25} fade={18} opacity={0.9} speed={0.06} color="#fbfdff" />
+          <Cloud seed={34} segments={mobile ? 16 : 22} bounds={[2.2, 0.95, 0.9]} concentrate="inside" volume={3} smallestVolume={0.16} growth={3.1} fade={12} opacity={0.36} speed={0.035} color="#d5e8f1" position={[1.55, 0.62, -1.2]} />
         </group>
       </Clouds>
     </>
