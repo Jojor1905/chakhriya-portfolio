@@ -1,3 +1,6 @@
+"use client";
+
+import { StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import type { Project } from "@/types/project";
 import { ProjectCard } from "./project-card";
 
@@ -15,16 +18,17 @@ export function ProjectGrid({
   videoPlaybackEnabled = true,
 }: ProjectGridProps) {
   return (
-    <div className="project-grid">
+    <StaggerGroup className="project-grid" delay={0.02}>
       {projects.map((project) => (
-        <ProjectCard
-          key={project.slug}
-          project={project}
-          returnTo={returnTo}
-          onSelect={onProjectSelect}
-          videoPlaybackEnabled={videoPlaybackEnabled}
-        />
+        <StaggerItem key={project.slug}>
+          <ProjectCard
+            project={project}
+            returnTo={returnTo}
+            onSelect={onProjectSelect}
+            videoPlaybackEnabled={videoPlaybackEnabled}
+          />
+        </StaggerItem>
       ))}
-    </div>
+    </StaggerGroup>
   );
 }

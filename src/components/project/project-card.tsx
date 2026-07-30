@@ -60,7 +60,7 @@ export function ProjectCard({
   );
 
   return (
-    <article className={`project-card project-card--${project.slug} reveal__item`}>
+    <article className={`project-card project-card--${project.slug}`}>
       {onSelect ? (
         <button
           className="project-card__link"

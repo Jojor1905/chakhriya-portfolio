@@ -1,6 +1,9 @@
+"use client";
+
 import { EducationItem } from "@/components/education/education-item";
 import { SectionAtmosphere } from "@/components/layout/section-atmosphere";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, StaggerGroup, StaggerItem, motionTokens } from "@/components/motion/reveal";
+import { motion, useReducedMotion } from "motion/react";
 import type { EducationSection } from "@/types/education";
 
 type EducationTimelineProps = {
@@ -10,35 +13,43 @@ type EducationTimelineProps = {
 export function EducationTimeline({
   education,
 }: EducationTimelineProps) {
+  const reduced = useReducedMotion();
   return (
-    <Reveal
+    <section
       className="section education"
       id="education"
       aria-labelledby="education-title"
-      stagger
     >
       <SectionAtmosphere tone="mist" />
       <div className="section-container education__container">
-        <header className="section-heading education__heading reveal__heading">
+        <Reveal className="section-heading education__heading" as="header" distance={motionTokens.headingDistance}>
           <p className="section-kicker">{education.label}</p>
           <h2 id="education-title">{education.title}</h2>
           <p>{education.subtitle}</p>
-        </header>
+        </Reveal>
 
         <div className="education-timeline">
-          <ol
+          <motion.span
+            className="education-timeline__motion-line"
+            aria-hidden="true"
+            initial={reduced ? false : { scaleY: 0 }}
+            whileInView={reduced ? undefined : { scaleY: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          />
+          <StaggerGroup
             className="education-timeline__list"
             aria-label="Education milestones"
+            as="ol"
           >
             {education.items.map((item) => (
-              <EducationItem
-                item={item}
-                key={`${item.institution}-${item.startYear}`}
-              />
+              <StaggerItem as="li" key={`${item.institution}-${item.startYear}`} distance={motionTokens.paragraphDistance}>
+                <EducationItem item={item} />
+              </StaggerItem>
             ))}
-          </ol>
+          </StaggerGroup>
         </div>
       </div>
-    </Reveal>
+    </section>
   );
 }

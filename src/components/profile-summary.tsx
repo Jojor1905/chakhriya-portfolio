@@ -9,10 +9,9 @@ type ProfileSummaryProps = {
 export function ProfileSummary({ items }: ProfileSummaryProps) {
   return (
     <Reveal
-      as="aside"
       className="profile-summary"
       aria-label="Profile summary"
-      stagger
+      as="aside"
     >
       <SectionAtmosphere tone="quiet" />
       <div className="section-container">

@@ -1,66 +1,35 @@
-export type SectionAtmosphereTone =
-  | "mist"
-  | "structured"
-  | "quiet"
-  | "airy"
-  | "dusk";
+"use client";
 
-type CloudAsset = {
-  src: string;
-  position?: "edge" | "wide";
-};
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
-type SectionAtmosphereProps = {
-  tone: SectionAtmosphereTone;
-  cloudAsset?: CloudAsset;
-  cloudSlot?: CloudAsset["position"];
-  motion?: "none" | "drift";
-};
+export type SectionAtmosphereTone = "mist" | "structured" | "quiet" | "airy" | "dusk";
 
-type CloudAssetSlotProps = {
-  asset?: CloudAsset;
-  position?: CloudAsset["position"];
-};
+export function SectionAtmosphere({ tone }: { tone: SectionAtmosphereTone }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const [compact, setCompact] = useState(false);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const travel = (tone === "quiet" ? 20 : 56) * (compact ? 0.5 : 1);
+  const horizontalTravel = (tone === "quiet" ? 12 : 28) * (compact ? 0.5 : 1);
+  const y = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [-travel / 2, travel / 2]);
+  const x = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [horizontalTravel / 2, -horizontalTravel / 2]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], reduced ? [1, 1, 1] : [0.72, 1, 0.76]);
 
-export function CloudAssetSlot({ asset, position }: CloudAssetSlotProps) {
-  if (!asset) {
-    return null;
-  }
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px)");
+    const update = () => setCompact(query.matches);
+
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
   return (
-    <span
-      className={`section-atmosphere__asset section-atmosphere__asset--${asset.position ?? position ?? "edge"}`}
-    >
-      <Image src={asset.src} alt="" fill sizes="(max-width: 767px) 78vw, 52vw" />
-    </span>
-  );
-}
-
-export function SectionHaze() {
-  return <span className="section-atmosphere__haze" />;
-}
-
-export function AtmosphericGrain() {
-  return <span className="section-atmosphere__grain" />;
-}
-
-export function SectionAtmosphere({
-  tone,
-  cloudAsset,
-  cloudSlot,
-  motion = "none",
-}: SectionAtmosphereProps) {
-  return (
-    <div
-      className={`section-atmosphere section-atmosphere--${tone}`}
-      data-motion={motion}
-      aria-hidden="true"
-    >
-      <span className="section-atmosphere__sky" />
-      <SectionHaze />
-      <AtmosphericGrain />
-      <CloudAssetSlot asset={cloudAsset} position={cloudSlot} />
+    <div className={`section-atmosphere section-atmosphere--${tone}`} ref={ref} aria-hidden="true">
+      <motion.span className="section-atmosphere__sky" style={{ y, x, opacity }} />
+      <motion.span className="section-atmosphere__haze" style={{ y, x, opacity }} />
+      {tone !== "quiet" && <span className="section-atmosphere__grain" />}
     </div>
   );
 }
-import Image from "next/image";

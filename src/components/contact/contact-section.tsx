@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SectionAtmosphere } from "@/components/layout/section-atmosphere";
-import { Reveal } from "@/components/motion/reveal";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import { contactDetails } from "@/content/contact";
 import type { Dictionary } from "@/content/types";
 
@@ -11,25 +11,24 @@ type ContactSectionProps = {
 
 export function ContactSection({ contact, footer }: ContactSectionProps) {
   return (
-    <Reveal
+    <section
       className="contact-section"
       id="contact"
       aria-labelledby="contact-title"
-      stagger
-      variant="fade-up"
     >
-      <SectionAtmosphere tone="dusk" cloudSlot="wide" />
+      <SectionAtmosphere tone="dusk" />
       <div className="section-container">
         <div className="contact-section__top">
-          <header className="contact-section__heading reveal__heading">
+          <Reveal className="contact-section__heading" as="header" distance={24}>
             <p className="section-kicker">{contact.kicker}</p>
             <h2 id="contact-title">{contact.title}</h2>
             <p>{contact.body}</p>
-          </header>
+          </Reveal>
 
-          <div className="contact-section__actions">
-            <a
-              className="contact-action reveal__item"
+          <StaggerGroup className="contact-section__actions" delay={0.08}>
+            <StaggerItem distance={18}>
+              <a
+              className="contact-action"
               href={`mailto:${contactDetails.email}`}
               aria-label="Email Chakhriya Korada"
             >
@@ -50,10 +49,12 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
               <span className="contact-action__arrow" aria-hidden="true">
                 ↗
               </span>
-            </a>
+              </a>
+            </StaggerItem>
 
-            <a
-              className="contact-action reveal__item"
+            <StaggerItem distance={18}>
+              <a
+              className="contact-action"
               href={contactDetails.phoneHref}
               aria-label="Call Chakhriya Korada"
             >
@@ -73,10 +74,12 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
               <span className="contact-action__arrow" aria-hidden="true">
                 ↗
               </span>
-            </a>
+              </a>
+            </StaggerItem>
 
-            <a
-              className="contact-action reveal__item"
+            <StaggerItem distance={18}>
+              <a
+              className="contact-action"
               href={contactDetails.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -97,11 +100,12 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
               <span className="contact-action__arrow" aria-hidden="true">
                 ↗
               </span>
-            </a>
-          </div>
+              </a>
+            </StaggerItem>
+          </StaggerGroup>
         </div>
 
-        <footer className="contact-section__footer reveal__item">
+        <Reveal className="contact-section__footer" as="footer" distance={18} delay={0.14}>
           <div className="contact-section__footer-top">
             <a className="contact-section__back-to-top" href="#top">
               {footer.backToTop} <span aria-hidden="true">↗</span>
@@ -117,8 +121,8 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
               <p>{footer.status}</p>
             </div>
           </div>
-        </footer>
+        </Reveal>
       </div>
-    </Reveal>
+    </section>
   );
 }

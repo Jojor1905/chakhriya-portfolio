@@ -8,7 +8,7 @@ type SiteFooterProps = {
 export function SiteFooter({ footer }: SiteFooterProps) {
   return (
     <footer className="site-footer">
-      <SectionAtmosphere tone="dusk" cloudSlot="wide" />
+      <SectionAtmosphere tone="dusk" />
       <div className="site-footer__inner">
         <div className="site-footer__top">
           <a href="#top">{footer.backToTop} <span aria-hidden="true">↗</span></a>

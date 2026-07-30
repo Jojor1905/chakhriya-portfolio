@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Group } from "three";
 import styles from "./cloud-lab.module.css";
 
-type CloudLabControls = {
+export type CloudLabControls = {
   segments: number;
   bounds: number;
   density: number;
@@ -19,11 +19,11 @@ type CloudLabControls = {
   light: string;
 };
 
-const DEFAULT_CONTROLS: CloudLabControls = {
-  segments: 42,
-  bounds: 3.8,
-  density: 4.8,
-  opacity: 0.62,
+export const DEFAULT_CONTROLS: CloudLabControls = {
+  segments: 54,
+  bounds: 4.8,
+  density: 5.8,
+  opacity: 0.9,
   softness: 0.72,
   driftSpeed: 0.055,
   noiseSpeed: 0.09,
@@ -68,7 +68,7 @@ function useEnvironment() {
   return environment;
 }
 
-function CloudMotion({
+export function CloudMotion({
   controls,
   mobile,
   reducedMotion,
@@ -115,7 +115,7 @@ function CloudMotion({
         limit={mobile ? mobileSegments + 16 : controls.segments + 24}
         range={mobile ? mobileSegments + 16 : controls.segments + 24}
       >
-        <group ref={mainCloud} position={[1.15, 0.1, 0]}>
+        <group ref={mainCloud} position={[0.65, 0.1, 1.35]} scale={1.18}>
           <Cloud
             seed={8}
             segments={mobile ? mobileSegments : controls.segments}
@@ -124,7 +124,7 @@ function CloudMotion({
             volume={controls.density}
             smallestVolume={0.18}
             growth={controls.softness * 5.6}
-            fade={13}
+            fade={18}
             opacity={controls.opacity}
             speed={controls.noiseSpeed}
             color="#f8fcff"
@@ -204,7 +204,7 @@ export function CloudLab() {
   return (
     <main className={styles.lab} style={canvasStyle}>
       <div className={styles.heading}>
-        <p>Visual prototype</p>
+        <p>Cloud Lab Active</p>
         <h1>Cloud laboratory</h1>
         <span>Sprite-based volume study — not integrated into the portfolio.</span>
       </div>

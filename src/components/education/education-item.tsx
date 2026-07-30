@@ -13,7 +13,7 @@ export function EducationItem({
   }`;
 
   return (
-    <li className="education-timeline__item">
+    <div className="education-timeline__item">
       <div className="education-timeline__content">
         <p className="education-timeline__period">{period}</p>
         <div className="education-timeline__institution education-institution">
@@ -60,6 +60,6 @@ export function EducationItem({
         className="education-timeline__dot"
         aria-hidden="true"
       />
-    </li>
+    </div>
   );
 }
