@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowDownIcon } from "@/components/icons/arrow-icons";
 import { ActivityList } from "@/components/activity/activity-list";
 import { CertificateSlider } from "@/components/certificate/certificate-slider";
 import { ContactSection } from "@/components/contact/contact-section";
@@ -95,7 +96,7 @@ export function HomePage({ dictionary }: HomePageProps) {
               </div>
               <a className="hero__scroll-cue" href="#about">
                 <span>Scroll to explore</span>
-                <span aria-hidden="true">↓</span>
+                <ArrowDownIcon className="arrow-icon" aria-hidden="true" />
               </a>
             </div>
             <HeroPortrait />

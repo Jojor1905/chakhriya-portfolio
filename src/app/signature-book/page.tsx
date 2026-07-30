@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeftIcon } from "@/components/icons/arrow-icons";
 import { PortfolioBook } from "@/components/signature/portfolio-book";
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export default function SignatureBookPage() {
   return (
     <main className="signature-book-preview">
       <Link className="signature-book-preview__back" href="/">
-        <span aria-hidden="true">←</span> Back to portfolio
+        <ArrowLeftIcon className="arrow-icon" aria-hidden="true" /> Back to portfolio
       </Link>
       <PortfolioBook />
     </main>

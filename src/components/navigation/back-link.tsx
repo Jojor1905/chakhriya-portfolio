@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ArrowLeftIcon } from "@/components/icons/arrow-icons";
 import { getSafeInternalPath } from "@/lib/navigation";
 
 type BackLinkProps = {
@@ -33,7 +34,7 @@ export function BackLink({
 
   return (
     <button className={className} type="button" onClick={handleBack}>
-      <span aria-hidden="true">←</span> {label}
+      <ArrowLeftIcon className="arrow-icon" aria-hidden="true" /> {label}
     </button>
   );
 }

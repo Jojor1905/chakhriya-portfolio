@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons/arrow-icons";
 
 type BookPage = {
   label: string;
@@ -284,7 +285,7 @@ export function PortfolioBook() {
               disabled={isFirstSpread || isTurning}
               aria-label="Previous spread"
             >
-              <span aria-hidden="true">←</span>
+              <ArrowLeftIcon className="arrow-icon" aria-hidden="true" />
             </button>
             <p aria-hidden="true">{String(activeSpread + 1).padStart(2, "0")} / {String(spreads.length).padStart(2, "0")}</p>
             <button
@@ -294,7 +295,7 @@ export function PortfolioBook() {
               disabled={isTurning}
               aria-label={isLastSpread ? "Close portfolio book" : "Next spread"}
             >
-              <span aria-hidden="true">{isLastSpread ? "×" : "→"}</span>
+              {isLastSpread ? <span aria-hidden="true">×</span> : <ArrowRightIcon className="arrow-icon" aria-hidden="true" />}
             </button>
             <button
               className="portfolio-book__close"

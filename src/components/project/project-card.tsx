@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRightIcon } from "@/components/icons/arrow-icons";
 import { ProjectVideo } from "@/components/project/project-video";
 import { getSafeInternalPath } from "@/lib/navigation";
 import type { Project } from "@/types/project";
@@ -50,9 +51,7 @@ export function ProjectCard({
         </div>
         <div className="project-card__title-row">
           <h3>{project.shortTitle ?? project.title}</h3>
-          <span className="project-card__arrow" aria-hidden="true">
-            ↗
-          </span>
+          <ArrowUpRightIcon className="project-card__arrow arrow-icon" aria-hidden="true" />
         </div>
         <p className="project-card__summary">{project.summary}</p>
       </div>

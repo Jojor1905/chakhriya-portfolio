@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/content/types";
+import { ArrowUpRightIcon } from "@/components/icons/arrow-icons";
 import { SectionAtmosphere } from "@/components/layout/section-atmosphere";
 
 type SiteFooterProps = {
@@ -11,7 +12,7 @@ export function SiteFooter({ footer }: SiteFooterProps) {
       <SectionAtmosphere tone="dusk" />
       <div className="site-footer__inner">
         <div className="site-footer__top">
-          <a href="#top">{footer.backToTop} <span aria-hidden="true">↗</span></a>
+          <a href="#top">{footer.backToTop} <ArrowUpRightIcon className="arrow-icon" aria-hidden="true" /></a>
         </div>
         <div className="site-footer__meta">
           <p>{footer.note}</p>

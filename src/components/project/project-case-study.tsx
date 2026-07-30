@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRightIcon } from "@/components/icons/arrow-icons";
 import { ProjectVideo } from "@/components/project/project-video";
 import type { Project } from "@/types/project";
 
@@ -107,9 +108,7 @@ export function ProjectCaseStudy({
                 height={80}
               />
               <span>View Figma Design</span>
-              <span className="case-study__figma-arrow" aria-hidden="true">
-                ↗
-              </span>
+              <ArrowUpRightIcon className="case-study__figma-arrow arrow-icon" aria-hidden="true" />
             </a>
           ) : null}
         </div>

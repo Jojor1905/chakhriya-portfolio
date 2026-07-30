@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRightIcon } from "@/components/icons/arrow-icons";
 import { SectionAtmosphere } from "@/components/layout/section-atmosphere";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import { contactDetails } from "@/content/contact";
@@ -46,9 +47,7 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
                   {contactDetails.email}
                 </span>
               </span>
-              <span className="contact-action__arrow" aria-hidden="true">
-                ↗
-              </span>
+              <ArrowUpRightIcon className="contact-action__arrow arrow-icon" aria-hidden="true" />
               </a>
             </StaggerItem>
 
@@ -71,9 +70,7 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
                   {contactDetails.phone}
                 </span>
               </span>
-              <span className="contact-action__arrow" aria-hidden="true">
-                ↗
-              </span>
+              <ArrowUpRightIcon className="contact-action__arrow arrow-icon" aria-hidden="true" />
               </a>
             </StaggerItem>
 
@@ -97,9 +94,7 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
                 <span className="contact-action__label">LinkedIn</span>
                 <span className="contact-action__detail">View my profile</span>
               </span>
-              <span className="contact-action__arrow" aria-hidden="true">
-                ↗
-              </span>
+              <ArrowUpRightIcon className="contact-action__arrow arrow-icon" aria-hidden="true" />
               </a>
             </StaggerItem>
           </StaggerGroup>
@@ -108,7 +103,7 @@ export function ContactSection({ contact, footer }: ContactSectionProps) {
         <Reveal className="contact-section__footer" as="footer" distance={18} delay={0.14}>
           <div className="contact-section__footer-top">
             <a className="contact-section__back-to-top" href="#top">
-              {footer.backToTop} <span aria-hidden="true">↗</span>
+              {footer.backToTop} <ArrowUpRightIcon className="arrow-icon" aria-hidden="true" />
             </a>
           </div>
           <div className="contact-section__footer-meta-row">

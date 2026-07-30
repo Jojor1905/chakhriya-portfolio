@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons/arrow-icons";
 import { notFound } from "next/navigation";
 import { BackLink } from "@/components/navigation/back-link";
 import { ProjectCaseStudy } from "@/components/project/project-case-study";
@@ -55,11 +56,11 @@ export default async function ProjectDetailPage({
           <nav className="project-pagination" aria-label="Project pagination">
             <Link href={`/projects/${previous.slug}`} rel="prev">
               <span>Previous project</span>
-              <strong>← {previous.title}</strong>
+              <strong><ArrowLeftIcon className="arrow-icon" aria-hidden="true" /> {previous.title}</strong>
             </Link>
             <Link href={`/projects/${next.slug}`} rel="next">
               <span>Next project</span>
-              <strong>{next.title} →</strong>
+              <strong>{next.title} <ArrowRightIcon className="arrow-icon" aria-hidden="true" /></strong>
             </Link>
           </nav>
         </article>

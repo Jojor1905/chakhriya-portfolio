@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ArrowUpRightIcon } from "@/components/icons/arrow-icons";
 import type { Activity } from "@/types/activity";
 
 type ActivityCardProps = {
@@ -117,7 +118,7 @@ export function ActivityCard({ activity, index }: ActivityCardProps) {
                 href={activity.href}
                 aria-label={`View activity: ${activity.title}`}
               >
-                View activity <span aria-hidden="true">↗</span>
+                View activity <ArrowUpRightIcon className="arrow-icon" aria-hidden="true" />
               </Link>
             ) : null}
           </div>

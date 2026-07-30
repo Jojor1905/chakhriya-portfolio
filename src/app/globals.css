@@ -3546,7 +3546,7 @@ main {
   color: var(--text-light);
 }
 
-.site-footer__top a span {
+.site-footer__top a .arrow-icon {
   color: var(--accent-light);
 }
 
@@ -4952,7 +4952,7 @@ body {
   text-decoration: none;
 }
 
-.contact-section__back-to-top span {
+.contact-section__back-to-top .arrow-icon {
   color: var(--accent-light);
   transition: transform var(--motion-fast) var(--motion-ease-out);
 }
@@ -5002,8 +5002,8 @@ body {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .contact-section__back-to-top:hover span,
-  .contact-section__back-to-top:focus-visible span {
+  .contact-section__back-to-top:hover .arrow-icon,
+  .contact-section__back-to-top:focus-visible .arrow-icon {
     transform: translate(0.15rem, -0.15rem);
   }
 }
@@ -5220,6 +5220,18 @@ body {
   transform: none;
 }
 
+.arrow-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  vertical-align: -0.125em;
+}
+
+.hero__scroll-cue .arrow-icon {
+  color: #557890;
+}
+
 body:has(.portfolio-loader) .hero__content,
 body:has(.portfolio-loader) .hero-portrait {
   transition:
@@ -5247,6 +5259,85 @@ body:has(.portfolio-loader[data-phase="opening"]) .hero-portrait {
     opacity: 1;
     transform: none;
     transition-duration: 180ms;
+  }
+}
+
+/* Mobile timeline: preserve the editorial desktop line while giving each milestone a stable reading column. */
+@media (max-width: 767px) {
+  .education-timeline {
+    margin-top: 2.5rem;
+  }
+
+  .education-timeline__list {
+    gap: 2.75rem;
+    padding: 0;
+  }
+
+  .education-timeline__list > li {
+    min-width: 0;
+    list-style: none;
+  }
+
+  .education-timeline__list::before,
+  .education-timeline__motion-line {
+    top: 0.8125rem;
+    bottom: 0.8125rem;
+    left: 0.75rem;
+  }
+
+  .education-timeline__item {
+    min-width: 0;
+    padding-left: 3rem;
+  }
+
+  .education-timeline__item + .education-timeline__item {
+    padding-top: 0;
+  }
+
+  .education-timeline__item:not(:last-child) .education-timeline__content {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .education-timeline__dot {
+    top: 0.0625rem;
+    left: -0.0625rem;
+    width: 1.625rem;
+    height: 1.625rem;
+  }
+
+  .education-timeline__content {
+    min-width: 0;
+  }
+
+  .education-timeline__period {
+    position: static;
+    width: auto;
+    margin: 0 0 0.875rem;
+    overflow-wrap: anywhere;
+  }
+
+  .education-timeline__institution {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.875rem;
+    min-width: 0;
+  }
+
+  .education-timeline__institution h3,
+  .education-timeline__location,
+  .education-timeline__details dd {
+    overflow-wrap: anywhere;
+  }
+
+  .education-timeline__details {
+    gap: 0.875rem;
+    margin-top: 1.25rem;
+  }
+
+  .education-timeline__details > div {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
   }
 }
 

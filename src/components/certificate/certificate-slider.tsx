@@ -8,6 +8,7 @@ import {
   type KeyboardEvent,
   type WheelEvent,
 } from "react";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons/arrow-icons";
 import { CertificateCard } from "@/components/certificate/certificate-card";
 import { CertificatePreview } from "@/components/certificate/certificate-preview";
 import type { Certificate } from "@/types/certificate";
@@ -239,7 +240,7 @@ export function CertificateSlider({
             disabled={activeIndex === 0}
             aria-label="Previous certificates"
           >
-            <span aria-hidden="true">←</span>
+            <ArrowLeftIcon className="arrow-icon" aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -247,7 +248,7 @@ export function CertificateSlider({
             disabled={activeIndex === certificates.length - 1}
             aria-label="Next certificates"
           >
-            <span aria-hidden="true">→</span>
+            <ArrowRightIcon className="arrow-icon" aria-hidden="true" />
           </button>
         </div>
       </div>
