@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/homepage";
-import { PortfolioLoader } from "@/components/loading/portfolio-loader";
 import { en } from "@/content/en";
 
 export const metadata: Metadata = {
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <PortfolioLoader>
-      <HomePage dictionary={en} />
-    </PortfolioLoader>
-  );
+  return <HomePage dictionary={en} />;
 }

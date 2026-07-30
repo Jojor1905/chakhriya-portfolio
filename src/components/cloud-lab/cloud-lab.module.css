@@ -1,0 +1,13 @@
+.lab { position: relative; min-height: 100svh; overflow: hidden; color: #173042; }
+.canvas { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; }
+.heading { position: relative; z-index: 1; width: min(100% - 2.5rem, 72rem); margin: 0 auto; padding-top: clamp(2rem, 6vw, 5rem); pointer-events: none; }
+.heading p { margin: 0 0 0.75rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.heading h1 { max-width: 8ch; margin: 0; font-size: clamp(3rem, 8vw, 7rem); line-height: 0.9; letter-spacing: -0.05em; }
+.heading span { display: block; max-width: 34rem; margin-top: 1.25rem; font-size: 0.875rem; }
+.controls { position: absolute; z-index: 2; right: 1rem; bottom: 1rem; width: min(18rem, calc(100vw - 2rem)); padding: 1rem; border: 1px solid rgb(23 48 66 / 15%); background: rgb(248 252 253 / 82%); font-size: 0.75rem; backdrop-filter: blur(12px); }
+.controls p { margin: 0 0 0.75rem; font-weight: 700; }
+.controls label { display: grid; grid-template-columns: 4.5rem 1fr; align-items: center; gap: 0.5rem; margin-top: 0.45rem; }
+.controls input[type="range"] { width: 100%; accent-color: #54788e; }
+.controls input[type="color"] { width: 100%; height: 1.5rem; padding: 0; border: 0; background: transparent; }
+.fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; text-align: center; }
+@media (max-width: 767px) { .heading { width: calc(100% - 2rem); padding-top: 2rem; } .controls { display: none; } }
