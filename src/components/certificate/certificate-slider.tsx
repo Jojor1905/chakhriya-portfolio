@@ -2,11 +2,11 @@
 
 import {
   useCallback,
-  useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type KeyboardEvent,
-  type WheelEvent,
+  type PointerEvent,
 } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons/arrow-icons";
 import { CertificateCard } from "@/components/certificate/certificate-card";
@@ -17,172 +17,144 @@ type CertificateSliderProps = {
   certificates: Certificate[];
 };
 
+type CertificatePosition = "active" | "previous" | "next" | "hidden";
+
+function getCertificatePosition(
+  index: number,
+  activeIndex: number,
+  certificateCount: number,
+): CertificatePosition {
+  if (index === activeIndex) {
+    return "active";
+  }
+
+  if (certificateCount < 2) {
+    return "hidden";
+  }
+
+  if (index === (activeIndex - 1 + certificateCount) % certificateCount) {
+    return "previous";
+  }
+
+  if (index === (activeIndex + 1) % certificateCount) {
+    return "next";
+  }
+
+  return "hidden";
+}
+
 export function CertificateSlider({
   certificates,
 }: CertificateSliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const scrollFrameRef = useRef(0);
-  const programmaticIndexRef = useRef<number | null>(null);
-  const activeIndexRef = useRef(0);
+  const swipeRef = useRef<{ pointerId: number; startX: number } | null>(null);
+  const dragOffsetRef = useRef(0);
+  const suppressClickRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const [previewCertificate, setPreviewCertificate] =
     useState<Certificate | null>(null);
 
-  const commitActiveIndex = useCallback((index: number) => {
-    if (index === activeIndexRef.current) {
+  const goToIndex = useCallback((requestedIndex: number) => {
+    if (certificates.length === 0) {
       return;
     }
 
-    activeIndexRef.current = index;
-    setActiveIndex(index);
-  }, []);
-
-  const scrollToIndex = useCallback(
-    (requestedIndex: number, behavior?: ScrollBehavior) => {
-      const track = trackRef.current;
-
-      if (!track || certificates.length === 0) {
-        return;
-      }
-
-      const cards = Array.from(
-        track.querySelectorAll<HTMLElement>(".certificate-card"),
-      );
-      const index = Math.min(
-        Math.max(requestedIndex, 0),
-        certificates.length - 1,
-      );
-      const card = cards[index];
-
-      if (!card) {
-        return;
-      }
-
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      const left =
-        card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
-
-      programmaticIndexRef.current = index;
-      commitActiveIndex(index);
-      track.scrollTo({
-        left,
-        behavior: behavior ?? (reducedMotion ? "auto" : "smooth"),
-      });
-    },
-    [certificates.length, commitActiveIndex],
-  );
-
-  const updateActiveIndex = useCallback(() => {
-    const track = trackRef.current;
-
-    if (!track) {
-      return;
-    }
-
-    const cards = Array.from(
-      track.querySelectorAll<HTMLElement>(".certificate-card"),
+    setActiveIndex(
+      (requestedIndex + certificates.length) % certificates.length,
     );
-    const trackCenter = track.scrollLeft + track.clientWidth / 2;
-    const programmaticIndex = programmaticIndexRef.current;
+  }, [certificates.length]);
 
-    if (programmaticIndex !== null) {
-      const targetCard = cards[programmaticIndex];
-
-      if (targetCard) {
-        const targetCenter =
-          targetCard.offsetLeft + targetCard.offsetWidth / 2;
-
-        if (Math.abs(targetCenter - trackCenter) <= 2) {
-          programmaticIndexRef.current = null;
-        }
-      }
-
-      return;
-    }
-
-    let closestIndex = activeIndexRef.current;
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    cards.forEach((card, index) => {
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const distance = Math.abs(cardCenter - trackCenter);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    commitActiveIndex(closestIndex);
-  }, [commitActiveIndex]);
-
-  const requestActiveUpdate = useCallback(() => {
-    if (scrollFrameRef.current) {
-      return;
-    }
-
-    scrollFrameRef.current = window.requestAnimationFrame(() => {
-      scrollFrameRef.current = 0;
-      updateActiveIndex();
-    });
-  }, [updateActiveIndex]);
-
-  useEffect(() => {
-    const track = trackRef.current;
-
-    if (!track) {
-      return;
-    }
-
-    const centerActiveCard = () => {
-      scrollToIndex(activeIndexRef.current, "auto");
-    };
-    const resizeObserver = new ResizeObserver(centerActiveCard);
-    resizeObserver.observe(track);
-    const initialFrame = window.requestAnimationFrame(centerActiveCard);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.cancelAnimationFrame(initialFrame);
-
-      if (scrollFrameRef.current) {
-        window.cancelAnimationFrame(scrollFrameRef.current);
-      }
-    };
-  }, [scrollToIndex]);
-
-  const scrollByCard = (direction: -1 | 1) => {
-    scrollToIndex(activeIndexRef.current + direction);
+  const moveBy = (direction: -1 | 1) => {
+    goToIndex(activeIndex + direction);
   };
 
   const handleTrackKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowLeft") {
       event.preventDefault();
-      scrollByCard(-1);
+      moveBy(-1);
     }
 
     if (event.key === "ArrowRight") {
       event.preventDefault();
-      scrollByCard(1);
+      moveBy(1);
     }
   };
 
-  const handleTrackWheel = (event: WheelEvent<HTMLDivElement>) => {
-    programmaticIndexRef.current = null;
+  const resetDrag = () => {
+    swipeRef.current = null;
+    dragOffsetRef.current = 0;
+    setDragOffset(0);
+    setIsDragging(false);
+  };
 
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (
-      event.shiftKey &&
-      Math.abs(event.deltaY) > Math.abs(event.deltaX)
+      !event.isPrimary ||
+      (event.pointerType === "mouse" && event.button !== 0)
     ) {
-      event.preventDefault();
-      event.currentTarget.scrollBy({
-        left: event.deltaY,
-        behavior: "auto",
-      });
+      return;
+    }
+
+    swipeRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+    };
+    suppressClickRef.current = false;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const swipe = swipeRef.current;
+
+    if (!swipe || swipe.pointerId !== event.pointerId) {
+      return;
+    }
+
+    const maxOffset = Math.min(event.currentTarget.clientWidth * 0.14, 96);
+    const nextOffset = Math.max(
+      -maxOffset,
+      Math.min(maxOffset, event.clientX - swipe.startX),
+    );
+
+    dragOffsetRef.current = nextOffset;
+    setDragOffset(nextOffset);
+
+    if (Math.abs(nextOffset) > 6) {
+      setIsDragging(true);
     }
   };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const swipe = swipeRef.current;
+
+    if (!swipe || swipe.pointerId !== event.pointerId) {
+      return;
+    }
+
+    const completedOffset = dragOffsetRef.current;
+    const swipeThreshold = Math.max(
+      36,
+      Math.min(event.currentTarget.clientWidth * 0.08, 72),
+    );
+
+    suppressClickRef.current = Math.abs(completedOffset) > 8;
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    resetDrag();
+
+    if (Math.abs(completedOffset) >= swipeThreshold) {
+      moveBy(completedOffset < 0 ? 1 : -1);
+    }
+  };
+
+  const trackStyle = {
+    "--certificate-drag-offset": `${dragOffset}px`,
+  } as CSSProperties;
 
   return (
     <div className="certificate-slider reveal__item">
@@ -193,21 +165,38 @@ export function CertificateSlider({
         aria-label="Certificates"
         aria-roledescription="carousel"
         tabIndex={0}
-        onScroll={requestActiveUpdate}
+        data-dragging={isDragging ? "true" : undefined}
+        style={trackStyle}
         onKeyDown={handleTrackKeyDown}
-        onWheel={handleTrackWheel}
-        onPointerDown={() => {
-          programmaticIndexRef.current = null;
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={resetDrag}
+        onClickCapture={(event) => {
+          if (suppressClickRef.current) {
+            event.preventDefault();
+            event.stopPropagation();
+            suppressClickRef.current = false;
+          }
         }}
       >
-        {certificates.map((certificate, index) => (
-          <CertificateCard
-            certificate={certificate}
-            isActive={index === activeIndex}
-            key={certificate.id}
-            onPreview={setPreviewCertificate}
-          />
-        ))}
+        {certificates.map((certificate, index) => {
+          const position = getCertificatePosition(
+            index,
+            activeIndex,
+            certificates.length,
+          );
+
+          return (
+            <CertificateCard
+              certificate={certificate}
+              isActive={position === "active"}
+              position={position}
+              key={certificate.id}
+              onPreview={setPreviewCertificate}
+            />
+          );
+        })}
       </div>
 
       <div className="certificate-slider__navigation">
@@ -224,7 +213,7 @@ export function CertificateSlider({
             <button
               type="button"
               key={certificate.id}
-              onClick={() => scrollToIndex(index)}
+              onClick={() => goToIndex(index)}
               aria-label={`Go to certificate ${index + 1}`}
               aria-current={index === activeIndex ? "true" : undefined}
             >
@@ -236,17 +225,17 @@ export function CertificateSlider({
         <div className="certificate-slider__arrows">
           <button
             type="button"
-            onClick={() => scrollByCard(-1)}
-            disabled={activeIndex === 0}
-            aria-label="Previous certificates"
+            onClick={() => moveBy(-1)}
+            disabled={certificates.length < 2}
+            aria-label="Previous certificate"
           >
             <ArrowLeftIcon className="arrow-icon" aria-hidden="true" />
           </button>
           <button
             type="button"
-            onClick={() => scrollByCard(1)}
-            disabled={activeIndex === certificates.length - 1}
-            aria-label="Next certificates"
+            onClick={() => moveBy(1)}
+            disabled={certificates.length < 2}
+            aria-label="Next certificate"
           >
             <ArrowRightIcon className="arrow-icon" aria-hidden="true" />
           </button>

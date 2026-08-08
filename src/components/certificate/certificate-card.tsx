@@ -4,19 +4,23 @@ import type { Certificate } from "@/types/certificate";
 type CertificateCardProps = {
   certificate: Certificate;
   isActive: boolean;
+  position: "active" | "previous" | "next" | "hidden";
   onPreview: (certificate: Certificate) => void;
 };
 
 export function CertificateCard({
   certificate,
   isActive,
+  position,
   onPreview,
 }: CertificateCardProps) {
   return (
     <article
       className="certificate-card"
       data-active={isActive ? "" : undefined}
+      data-position={position}
       aria-current={isActive ? "true" : undefined}
+      aria-hidden={!isActive}
       aria-label={certificate.title}
     >
       <div className="certificate-card__image-frame">
@@ -32,7 +36,8 @@ export function CertificateCard({
             src={certificate.image}
             alt={certificate.imageAlt}
             fill
-            sizes="(max-width: 620px) 84vw, (max-width: 900px) 78vw, 60vw"
+            draggable={false}
+            sizes="(max-width: 620px) 88vw, (max-width: 1023px) 76vw, 68vw"
           />
         </button>
       </div>

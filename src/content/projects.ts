@@ -222,35 +222,43 @@ export const projects: Project[] = [
   },
   {
     slug: "skin-analysis-line-oa",
-    title: "AI Skin Analysis & Commerce Platform",
-    shortTitle: "AI Skin Analysis",
-    category: "AI-assisted Commerce · Beauty Tech",
+    title: "Wela AI Skincare Prototype",
+    shortTitle: "Wela",
+    category: "AI Prototype Development · Skincare",
     year: "2026",
     summary:
-      "A personalised beauty-commerce concept connecting AI-assisted skin analysis with skincare and wellness recommendations.",
+      "A working prototype that connects AI-assisted skin analysis with personalised skincare recommendations.",
     coverImage: "/Image/project/skincare/Skincare1.png",
     coverAlt:
-      "AI skin analysis and personalised skincare recommendation interface",
+      "Wela prototype screens showing image submission, skin analysis results, and skincare recommendations",
     mediaFit: "contain",
     figmaUrl:
-      "https://www.figma.com/design/A3r6uKZJD8ZaCNnFQ9DFCP/Skincare?node-id=662-4785&p=f&t=qRPKCArRJqhKrBZk-0",
+      "https://www.figma.com/design/BsvwxxlCfFjCeoorvKcg1f/Skincare-flow?node-id=0-1&t=qCgvdS8ScJ6qGrms-1",
     figmaAriaLabel: "Open the AI Skin Analysis Figma design in a new tab",
-    role: "UX/UI Designer & AI Product Researcher",
-    timeline: "Allmass Idea Internship · 2026",
+    githubLinks: [
+      {
+        url: "https://github.com/Jojor1905/wela-liff-prototype",
+        label: "View LIFF Prototype",
+        ariaLabel: "Open Wela LIFF Prototype on GitHub",
+      },
+      {
+        url: "https://github.com/Jojor1905/wela-skin-ai",
+        label: "View AI Repository",
+        ariaLabel: "Open Wela Skin AI repository on GitHub",
+      },
+    ],
+    role: "Front-end, Back-end, and AI Prototype Developer",
+    timeline: "Prototype & Learning Project · 2026",
     tools: [
-      "Figma",
-      "UX/UI Design",
-      "User Flow",
-      "Beauty Tech",
-      "AI-assisted Commerce",
+      "Front-end Prototype Development",
+      "Back-end Prototype Development",
+      "FastAPI",
+      "REST API",
+      "AI Model Training",
       "Computer Vision",
-      "Recommendation Systems",
-      "LINE OA",
-      "PDPA-aware Design",
-      "Lean Business Strategy",
-      "Customer Experience",
-      "CAC / LTV",
-      "Mobile-first Design",
+      "Image Analysis",
+      "LINE LIFF",
+      "ChatGPT Codex CLI",
     ],
     featured: true,
     experienceType: "internship",
@@ -258,154 +266,84 @@ export const projects: Project[] = [
     contextLabel: "Allmass Idea Internship Project",
     overviewTitle: "Project Overview",
     overviewBody:
-      "This project explores a personalised Beauty Tech and commerce platform that connects AI-assisted skin analysis with skincare, wellness, and product recommendations. Rather than treating AI analysis as a standalone feature, the concept uses it as the starting point of a guided customer journey—from understanding skin concerns to reviewing suitable products and making informed purchase decisions. The experience was designed for delivery through LINE OA or a dedicated mobile application, reducing the need for users to install or learn a complex new system.",
+      "Wela is an AI-assisted skincare prototype that explores how skin analysis can be connected with personalised skincare recommendations through a working digital system. In this project, I focused on building the prototype across multiple technical parts, including the front end, back end, AI model training, and API integration. The project was also an important hands-on learning experience for me. I used ChatGPT Codex CLI to explore unfamiliar technologies, understand implementation approaches, debug issues, and gradually connect each part of the system into a functional prototype.",
     sections: [
       {
-        title: "The Business Challenge",
-        body: "Beauty and skincare businesses often face high customer-acquisition costs, low trust in generic recommendations, and difficulty maintaining long-term customer relationships. Customers may also feel overwhelmed by product choices or uncertain about which products match their skin concerns. The project explores how AI-assisted analysis, understandable explanations, and a guided commerce flow could help businesses create a more relevant and engaging customer experience.",
-      },
-      {
-        title: "Three-Phase Lean Business Strategy",
+        title: "What I Built",
         subsections: [
           {
-            title: "Phase 1 — Market Penetration & Cash Flow",
-            body: "The proposed first phase begins by recommending and selling established skincare brands through the platform rather than manufacturing a private-label product immediately. This low-risk approach is designed to test customer demand, reduce initial manufacturing and inventory risk, and collect consented behavioural and preference data.",
+            title: "Front-end Prototype",
+            body: "Built the front-end prototype for the user flow, including image submission, questionnaire input, analysis results, and product recommendation screens.",
+          },
+          {
+            title: "AI Model Training",
+            body: "Experimented with training an AI model for the prototype to analyse facial images and identify selected skin concerns.",
+          },
+          {
+            title: "Back-end Prototype",
+            body: "Developed a lightweight back-end prototype to receive image data, communicate with the AI model, and return structured analysis results.",
+          },
+          {
+            title: "API Integration",
+            body: "Connected the front end, back end, AI analysis, and recommendation flow through APIs to create an end-to-end prototype system.",
+          },
+        ],
+      },
+      {
+        title: "Development Approach",
+        body: "I developed the prototype step by step, starting from the core system flow and then connecting each part of the application. This project gave me the opportunity to learn how front-end development, back-end services, AI model experimentation, and API integration work together in a single prototype. Because several parts of the implementation were new to me, I relied on hands-on testing and iterative learning with ChatGPT Codex CLI to better understand the technical workflow and improve the prototype over time.",
+      },
+      {
+        title: "System Workflow",
+        body: "The prototype connects the user interface, back-end service, AI analysis model, questionnaire data, and recommendation logic into one end-to-end workflow.",
+        images: [
+          {
+            src: "/Image/project/skincare/wela-flow.png",
+            alt: "Wela prototype workflow connecting image submission, questionnaire data, back-end processing, AI analysis, and skincare recommendations",
+            width: 1055,
+            height: 1491,
+            caption:
+              "Prototype system workflow — from image submission and AI analysis to personalised skincare recommendations.",
+          },
+        ],
+      },
+      {
+        title: "AI-assisted Development",
+        body: "ChatGPT Codex CLI played an important role in my learning and development process throughout this project. I used it to explore technical approaches, understand unfamiliar concepts, debug implementation issues, and learn how to connect the front end, back end, and AI workflow into a working prototype.",
+      },
+      {
+        title: "Tools & Technologies",
+        subsections: [
+          {
+            title: "Development",
+            body: "Technical work used to connect the application into a functional prototype.",
             points: [
-              "Could generate early revenue",
-              "Could identify frequently requested skin concerns and product categories",
+              "Front-end Prototype Development",
+              "Back-end Prototype Development",
+              "FastAPI",
+              "REST API",
             ],
           },
           {
-            title: "Phase 2 — Private Label & Brand Equity",
-            body: "After building a trusted user base and understanding recurring customer needs, the business could explore private-label products through qualified OEM partners. Product direction would be informed by aggregated user needs and feedback rather than relying only on assumptions or general market trends.",
-            points: [
-              "Potentially improved gross margins",
-              "Stronger brand identity and more differentiated products",
-              "Product development informed by real customer patterns",
-            ],
+            title: "AI",
+            body: "Experimentation used to support the prototype's image-analysis workflow.",
+            points: ["AI Model Training", "Computer Vision", "Image Analysis"],
           },
           {
-            title: "Phase 3 — Cross-Selling & Customer Lifetime Value",
-            body: "The ecosystem could extend beyond skincare into relevant wellness, nutrition, supplements, and healthy-lifestyle recommendations. Through API or partner integrations, the platform could connect users with external products and services without operating its own logistics fleet. This phase explores how relevant cross-selling could increase customer lifetime value while keeping the operating model relatively lean.",
+            title: "Platform",
+            body: "Platform used to connect the prototype with a LINE-based experience.",
+            points: ["LINE LIFF"],
+          },
+          {
+            title: "AI-assisted Development",
+            body: "AI-assisted tool used for technical learning, experimentation, and debugging.",
+            points: ["ChatGPT Codex CLI"],
           },
         ],
       },
       {
-        title: "AI as a Commerce Engine",
-        body: "The AI concept is designed not only to analyse skin but also to support personalisation, product discovery, and the customer journey.",
-        subsections: [
-          {
-            title: "Guided Analysis",
-            body: "Users provide a facial image through LINE OA or the application. The system then explores visible skin-related patterns and presents the results using understandable, non-alarming language. The concept is not presented as a medical diagnostic tool.",
-          },
-          {
-            title: "Personalised Recommendations",
-            body: "Analysis results can be connected with product attributes, user preferences, budget, and routine requirements to provide more relevant recommendations. Recommendations should explain why a product may be relevant rather than only displaying a product list.",
-          },
-          {
-            title: "Commerce Automation",
-            body: "The concept creates a guided journey from analysis to recommendation and checkout, reducing friction and supporting service availability beyond normal sales hours. It is not designed to replace professional medical advice or guarantee sales.",
-          },
-          {
-            title: "Technical Direction",
-            body: "The proposed technical direction explores YOLO-based computer-vision experiments, image processing, facial-region analysis, and recommendation logic. No real-time performance or accuracy claims are made without measured results.",
-          },
-        ],
-      },
-      {
-        title: "UX/UI Design Process",
-        body: "I was responsible for translating the product and business concept into a clear mobile-first user experience and interactive Figma prototype. The design focused on helping users feel informed and supported rather than judged by the skin-analysis results.",
-        subsections: [
-          {
-            title: "Target Users",
-            body: "The primary users include people who want understandable skincare guidance, feel overwhelmed by product options, prefer mobile-first or LINE-based services, want recommendations that consider their needs and routines, and may be cautious about sharing facial images.",
-          },
-          {
-            title: "User Journey",
-            body: "The proposed journey moves through the following steps.",
-            steps: [
-              "Enter through LINE OA or the mobile application",
-              "Review consent and privacy information",
-              "Upload or capture a facial image",
-              "Wait for analysis",
-              "Review understandable skin insights",
-              "Explore recommended products",
-              "Compare product information",
-              "Add products to cart or continue to consultation",
-              "Review progress in future sessions",
-            ],
-          },
-          {
-            title: "Trust-Centred Interface",
-            body: "The interface was designed with clear explanations, visible progress states, friendly language, and user control over each step. The design avoids overly negative language about appearance and does not present cosmetic concerns as medical conditions.",
-          },
-          {
-            title: "Product-Led Commerce",
-            body: "Product recommendations were positioned as part of the main experience, not as an unrelated advertisement after the analysis. The UI explains the connection between each recommendation and the user’s stated needs or observed patterns.",
-          },
-          {
-            title: "Prototype",
-            body: "The interactive prototype documents the proposed mobile flow, including consent, analysis, recommendations, and commerce touchpoints.",
-          },
-        ],
-      },
-      {
-        title: "Trust, Privacy & PDPA",
-        body: "Facial images and skin-analysis information may involve sensitive personal data. The concept therefore includes privacy and consent as core product requirements rather than optional legal text. Designed with PDPA-aware consent and data-handling principles.",
-        points: [
-          "Explicit consent before image processing",
-          "Clear explanation of why the image is required",
-          "Defined data-retention period",
-          "Ability to withdraw consent",
-          "Secure image transmission and storage",
-          "Restricted internal access",
-          "Deletion controls",
-          "No secondary data use without permission",
-          "Clear distinction between cosmetic guidance and medical diagnosis",
-        ],
-      },
-      {
-        title: "Business Metrics & Growth Logic",
-        body: "These are proposed metrics to validate, not achieved results.",
-        subsections: [
-          {
-            title: "Customer Acquisition Cost",
-            body: "Measure whether the interactive analysis experience helps attract users more efficiently than conventional product advertising.",
-          },
-          {
-            title: "Conversion Rate",
-            body: "Measure how many users move from analysis to product-detail views, cart actions, and completed purchases.",
-          },
-          {
-            title: "Customer Lifetime Value",
-            body: "Track whether personalised follow-up, routine recommendations, and cross-category offerings increase repeat engagement and purchasing over time.",
-          },
-          {
-            title: "Retention",
-            body: "Evaluate whether users return to monitor changes, update routines, or review new recommendations.",
-          },
-          {
-            title: "Recommendation Acceptance",
-            body: "Measure whether users understand and engage with the recommended products, rather than only viewing the analysis result.",
-          },
-        ],
-      },
-      {
-        title: "Competitive Advantage",
-        body: "The proposed competitive advantage is not only the AI scan itself but the combination of a convenient LINE-based or mobile experience, understandable analysis, personalised product recommendations, consented longitudinal user history, commerce integration, potential wellness and nutrition expansion, and a feedback loop between user needs and future product development. As the platform learns from consented user interactions, it could provide a more continuous and personalised experience than one-time generic recommendation tools.",
-      },
-      {
-        title: "My Role & Key Learning",
-        body: "My role focused on UX/UI design, product-flow planning, and connecting the AI concept with the business and commerce experience. This project strengthened my ability to connect user needs, AI capabilities, commercial goals, and privacy requirements within one product concept. I learned that a successful AI product requires more than a technically interesting feature: it also needs a clear customer journey, user trust, a realistic business model, measurable validation goals, and careful communication of the system’s limitations.",
-        points: [
-          "Defining the target-user journey",
-          "Structuring the skin-analysis flow",
-          "Designing the recommendation and commerce experience",
-          "Creating the mobile UI prototype in Figma",
-          "Considering trust, consent, and PDPA-related requirements",
-          "Aligning the user experience with business goals",
-          "Discussing ideas and improvements with the internship team",
-        ],
+        title: "Key Learning",
+        body: "This project helped me understand how different technical components — front-end development, back-end services, AI models, and APIs — can work together within a functional prototype. It also strengthened my ability to learn unfamiliar technologies independently, solve implementation problems through experimentation, and use AI-assisted tools to support the development process.",
       },
     ],
   },

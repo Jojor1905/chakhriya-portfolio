@@ -16,6 +16,30 @@ export function ProjectCaseStudy({
   videoPlaybackEnabled,
   videoPlaybackMode,
 }: ProjectCaseStudyProps) {
+  const figmaLink = project.figmaUrl ? (
+    <a
+      className="case-study__figma-link"
+      href={project.figmaUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={
+        project.figmaAriaLabel ??
+        `Open the ${project.title} Figma design in a new tab`
+      }
+    >
+      <Image
+        className="case-study__figma-icon"
+        src="/Image/icons/figma.svg"
+        alt=""
+        aria-hidden="true"
+        width={54}
+        height={80}
+      />
+      <span>View Figma Design</span>
+      <ArrowUpRightIcon className="case-study__figma-arrow arrow-icon" aria-hidden="true" />
+    </a>
+  ) : null;
+
   return (
     <>
       <header className="case-study__hero">
@@ -88,29 +112,37 @@ export function ProjectCaseStudy({
               ))}
             </ul>
           ) : null}
-          {project.figmaUrl ? (
-            <a
-              className="case-study__figma-link"
-              href={project.figmaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={
-                project.figmaAriaLabel ??
-                `Open the ${project.title} Figma design in a new tab`
-              }
-            >
-              <Image
-                className="case-study__figma-icon"
-                src="/Image/icons/figma.svg"
-                alt=""
-                aria-hidden="true"
-                width={54}
-                height={80}
-              />
-              <span>View Figma Design</span>
-              <ArrowUpRightIcon className="case-study__figma-arrow arrow-icon" aria-hidden="true" />
-            </a>
-          ) : null}
+          {project.githubLinks?.length ? (
+            <div className="case-study__action-links">
+              {figmaLink}
+              {project.githubLinks.map((link) => (
+                <a
+                  className="case-study__figma-link"
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.ariaLabel}
+                  key={link.url}
+                >
+                  <Image
+                    className="case-study__github-icon"
+                    src="/Image/icons/github.svg"
+                    alt=""
+                    aria-hidden="true"
+                    width={24}
+                    height={24}
+                  />
+                  <span>{link.label}</span>
+                  <ArrowUpRightIcon
+                    className="case-study__figma-arrow arrow-icon"
+                    aria-hidden="true"
+                  />
+                </a>
+              ))}
+            </div>
+          ) : (
+            figmaLink
+          )}
         </div>
       </section>
 

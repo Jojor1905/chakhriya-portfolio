@@ -46,6 +46,11 @@ export type Project = {
   video?: string;
   figmaUrl?: string;
   figmaAriaLabel?: string;
+  githubLinks?: Array<{
+    url: string;
+    label: string;
+    ariaLabel: string;
+  }>;
   role: string;
   timeline: string;
   tools: string[];
